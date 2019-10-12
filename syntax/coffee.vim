@@ -19,20 +19,18 @@ syntax sync fromstart
 " priority for keywords is higher than matches. This causes keywords to be
 " highlighted inside matches, even if a match says it shouldn't contain them --
 " like with coffeeAssign and coffeeDot.
-syn match coffeeStatement /\<\%(return\|break\|continue\|throw\)\>/ display
-hi def link coffeeStatement Statement
-
 syn match coffeeRepeat /\<\%(for\|while\|until\|loop\)\>/ display
+syn match coffeeRepeat /\(for\s\+\S\+\s\+\)\@<=in\(\s\+\)\@=/ display
 hi def link coffeeRepeat Repeat
 
 syn match coffeeConditional /\<\%(if\|else\|unless\|switch\|when\|then\)\>/
 \                           display
 hi def link coffeeConditional Conditional
 
-syn match coffeeException /\<\%(try\|catch\|finally\)\>/ display
+syn match coffeeException /\<\%(try\|catch\|finally\|throw\|Error\)\>/ display
 hi def link coffeeException Exception
 
-syn match coffeeKeyword /\<\%(new\|in\|of\|from\|by\|and\|or\|not\|is\|isnt\|class\|extends\|super\|do\|yield\|debugger\|import\|export\|default\|await\)\>/
+syn match coffeeKeyword /\<\%(new\|of\|from\|by\|class\|extends\|super\|do\|yield\|debugger\|import\|export\|default\|await\)\>/
 \                       display
 " The `own` keyword is only a keyword after `for`.
 syn match coffeeKeyword /\<for\s\+own\>/ contained containedin=coffeeRepeat
@@ -45,13 +43,22 @@ hi def link coffeeOperator Operator
 " The first case matches symbol operators only if they have an operand before.
 syn match coffeeExtendedOp /\%(\S\s*\)\@<=[+\-*/%&|\^=!<>?.]\{-1,}\|[-=]>\|--\|++\|:/
 \                          display
-syn match coffeeExtendedOp /\<\%(and\|or\)=/ display
+syn match coffeeExtendedOp /\<\%(and\|or\|is\|isnt\|not\)\>/ display
+syn match coffeeExtendedOp /\(for\s\+\S\+\s\+\)\@<!\(\s\+\)\@<=in\(\s\+\)\@=/ display
 hi def link coffeeExtendedOp coffeeOperator
+
+syn match coffeeStatement /\<\%(return\|break\|continue\)\>\|->/ display
+hi def link coffeeStatement Statement
 
 " This is separate from `coffeeExtendedOp` to help differentiate commas from
 " dots.
 syn match coffeeSpecialOp /[,;]/ display
 hi def link coffeeSpecialOp SpecialChar
+
+" =
+let s:punc_re = '=\|-\|+\|*\|@\|/\|%\|&\||\|^\|\~\|<\|>\|!=\|!'
+execute 'syn match coffeeStatement ''\(' . s:punc_re . '\)\@<!=\(' . s:punc_re . '\)\@!'''
+unlet s:punc_re
 
 syn match coffeeBoolean /\<\%(true\|on\|yes\|false\|off\|no\)\>/ display
 hi def link coffeeBoolean Boolean
@@ -60,8 +67,9 @@ syn match coffeeGlobal /\<\%(null\|undefined\)\>/ display
 hi def link coffeeGlobal Type
 
 " A special variable
-syn match coffeeSpecialVar /\<\%(this\|prototype\|arguments\)\>/ display
+syn match coffeeSpecialVar /\<\%(prototype\|arguments\)\>/ display
 hi def link coffeeSpecialVar Special
+syn match coffeeThis /\<\%(this\)\>/ display
 
 " An @-variable
 syn match coffeeSpecialIdent /@\%(\%(\I\|\$\)\%(\i\|\$\)*\)\?/ display
@@ -87,8 +95,9 @@ syn cluster coffeeInterpString contains=@coffeeBasicString,coffeeInterp
 " Regular strings
 syn region coffeeString start=/"/ skip=/\\\\\|\\"/ end=/"/
 \                       contains=@coffeeInterpString
-syn region coffeeString start=/'/ skip=/\\\\\|\\'/ end=/'/
+syn region coffeeSymbol start=/'/ skip=/\\\\\|\\'/ end=/'/
 \                       contains=@coffeeBasicString
+hi def link coffeeSymbol coffeeString
 hi def link coffeeString String
 
 " A integer, including a leading plus or minus
@@ -214,7 +223,7 @@ syn cluster coffeeAll contains=coffeeStatement,coffeeRepeat,coffeeConditional,
 \                              coffeeHeredoc,coffeeSpaceError,
 \                              coffeeSemicolonError,coffeeDotAccess,
 \                              coffeeProtoAccess,coffeeCurlies,coffeeBrackets,
-\                              coffeeParens
+\                              coffeeParens,coffeeSymbol
 
 if !exists('b:current_syntax')
   let b:current_syntax = 'coffee'
