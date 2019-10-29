@@ -22,7 +22,7 @@ syntax sync fromstart
 syn match coffeeKeyword /\<\%(new\|of\|from\|by\|class\|extends\|super\|do\|yield\|debugger\|import\|export\|default\|await\)\>/
 \                       display
 
-syn match coffeeRepeat /\<\(for\(\s\+own\)\?\|while\|until\|loop\)\s\+\>/ display
+syn match coffeeRepeat /\<\%(for\%(\s\+own\)\?\|while\|until\|loop\)\%(\s\+\)>/ display
 syn match coffeeRepeat /\(for\%(\s\+own\)\?\s\+\S\+\s\+\)\@<=\(in\|of\)\s\+/ display
 hi def link coffeeRepeat Repeat
 
