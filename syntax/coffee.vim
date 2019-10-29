@@ -23,7 +23,7 @@ syn match coffeeKeyword /\<\%(new\|of\|from\|by\|class\|extends\|super\|do\|yiel
 \                       display
 
 syn match coffeeRepeat /\<\%(for\%(\s\+own\)\?\|while\|until\|loop\)\>/ display
-syn match coffeeRepeat /\(for\%(\s\+own\)\?\s\+\S\+\s\+\)\@<=\(in\|of\)\(\s\+\)\@=/ display
+syn match coffeeRepeat /\(for\%(\s\+own\)\?\s\+\S\+\s\+\)\@<=\(in\|of\)\s\+/ display
 hi def link coffeeRepeat Repeat
 
 syn match coffeeConditional /\<\%(if\|else\|unless\|switch\|when\|then\)\>/
