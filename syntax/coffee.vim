@@ -1,4 +1,4 @@
-" Language:    CoffeeScript
+pfnjdfvkjfvkljfkjfvlkjfvlkfvlkjfvlkj" Language:    CoffeeScript
 " Maintainer:  Mick Koch <mick@kochm.co>
 " URL:         http://github.com/kchmck/vim-coffee-script
 " License:     WTFPL
