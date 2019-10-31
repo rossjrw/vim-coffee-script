@@ -84,7 +84,7 @@ hi def link coffeeConstant Constant
 
 " A variable name
 syn cluster coffeeIdentifier contains=coffeeSpecialVar,coffeeSpecialIdent,
-\                                     coffeeObject,coffeeConstant
+\                                     coffeeObject,coffeeConstant,coffeeFunction
 
 " A non-interpolated string
 syn cluster coffeeBasicString contains=@Spell,coffeeEscape
