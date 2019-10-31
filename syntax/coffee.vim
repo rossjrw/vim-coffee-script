@@ -46,7 +46,7 @@ hi def link coffeeExtendedOp coffeeOperator
 syn match coffeeStatement /\<\%(return\|break\|continue\)\>\|->/ display
 hi def link coffeeStatement Statement
 
-syn match coffeeFunction /[A-Za-z0-9]\+\(\s\+=\s\+\((.*)\s\+\)\?->\s*\)\@=$/ display
+syn match coffeeFunction /[A-Za-z0-9]\+\(\s\+=\s\+\((.*)\s\+\)\?->\)\@=/ display
 hi def link coffeeFunction Statement
 
 " This is separate from `coffeeExtendedOp` to help differentiate commas from
