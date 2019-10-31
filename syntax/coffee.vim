@@ -46,6 +46,9 @@ hi def link coffeeExtendedOp coffeeOperator
 syn match coffeeStatement /\<\%(return\|break\|continue\)\>\|->/ display
 hi def link coffeeStatement Statement
 
+syn match coffeeFunction /[A-Za-z0-9]\+\(\s\+=\s\+\((.*)\s\+\)\?->\s*\)\@=$/ display
+hi def link coffeeFunction Statement
+
 " This is separate from `coffeeExtendedOp` to help differentiate commas from
 " dots.
 syn match coffeeSpecialOp /[,;]/ display
@@ -219,7 +222,7 @@ syn cluster coffeeAll contains=coffeeStatement,coffeeRepeat,coffeeConditional,
 \                              coffeeHeredoc,coffeeSpaceError,
 \                              coffeeSemicolonError,coffeeDotAccess,
 \                              coffeeProtoAccess,coffeeCurlies,coffeeBrackets,
-\                              coffeeParens,coffeeSymbol
+\                              coffeeParens,coffeeSymbol,coffeeFunction
 
 if !exists('b:current_syntax')
   let b:current_syntax = 'coffee'
