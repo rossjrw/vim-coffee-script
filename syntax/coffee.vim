@@ -19,7 +19,7 @@ syntax sync fromstart
 " priority for keywords is higher than matches. This causes keywords to be
 " highlighted inside matches, even if a match says it shouldn't contain them --
 " like with coffeeAssign and coffeeDot.
-syn match coffeeFunction /\([A-Za-z0-9_]\+\(\s\+=\s\+\((.*)\s\+\)\?\(->|=>\)\)\@=\)/ display
+syn match coffeeFunction /\([A-Za-z0-9_]\+\(\s\+=\s\+\((.*)\s\+\)\?[-=]>\)\@=\)/ display
 hi def link coffeeFunction Statement
 
 syn match coffeeKeyword /\<\%(new\|of\|from\|by\|class\|extends\|super\|do\|yield\|debugger\|import\|export\|default\|await\)\>/
@@ -46,7 +46,7 @@ syn match coffeeExtendedOp /\<\%(and\|or\|is\|isnt\|not\)\>/ display
 syn match coffeeExtendedOp /\(for\s\+\S\+\s\+\)\@<!\(\s\+\)\@<=in\(\s\+\)\@=/ display
 hi def link coffeeExtendedOp coffeeOperator
 
-syn match coffeeStatement /\<\%(return\|break\|continue\)\>\|->|=>/ display
+syn match coffeeStatement /\<\%(return\|break\|continue\)\>\|[-=]>/ display
 hi def link coffeeStatement Statement
 
 " This is separate from `coffeeExtendedOp` to help differentiate commas from
